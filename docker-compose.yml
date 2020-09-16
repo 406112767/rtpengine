@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  rtpproxy:
+    image: rtpengine:latest
+    restart: always
+    network_mode: host
+    privileged: true
+    environment:
+      PUBLIC_IP: 192.168.1.149
+      PORT_MIN: 30000
+      PORT_MAX: 30100
+    ports:
+      - "22222:22222/udp"
+      - "30000-30100/udp"
+
