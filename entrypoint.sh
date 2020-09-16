@@ -21,16 +21,26 @@ case $CLOUD in
     PUBLIC_IP=$(curl -H Metadata:true "http://169.254.169.254/metadata/instance/network/interface/0/ipv4/ipAddress/0/publicIpAddress?api-version=2017-08-01&format=text")
     ;;
   *)
+    LOCAL_IP=`ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'`
     ;;
 esac
+
+[ -z "$BIND_IP" ] && { export BIND_IP='0.0.0.0'; }
+[ -z "$BIND_PORT" ] && { export BIND_PORT=22222; }
+[ -z "$PORT_MIN" ] && { export PORT_MIN=23000; }
+[ -z "$PORT_MAX" ] && { export PORT_MAX=32768; }
 
 if [ -n "$PUBLIC_IP" ]; then
   MY_IP="$LOCAL_IP"!"$PUBLIC_IP"
 else
-  MY_IP=`ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'`
+  MY_IP=$LOCAL_IP
 fi
 
 sed -i -e "s/MY_IP/$MY_IP/g" /etc/rtpengine.conf
+sed -i -e "s/BIND_IP/$BIND_IP/g" /etc/rtpengine.conf
+sed -i -e "s/BIND_PORT/$BIND_PORT/g" /etc/rtpengine.conf
+sed -i -e "s/PORT_MIN/$PORT_MIN/g" /etc/rtpengine.conf
+sed -i -e "s/PORT_MAX/$PORT_MAX/g" /etc/rtpengine.conf
 
 if [ "$1" = 'rtpengine' ]; then
   shift

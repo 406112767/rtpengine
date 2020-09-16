@@ -22,13 +22,7 @@ RUN apt-get update \
   && rm -Rf /var/lib/apt/lists/* 
 
 VOLUME ["/tmp"]
-
-EXPOSE 23000-32768/udp 22222/udp
-
 COPY ./entrypoint.sh /entrypoint.sh
-
 COPY ./rtpengine.conf /etc
-
 ENTRYPOINT ["/entrypoint.sh"]
-
 CMD ["rtpengine"]
