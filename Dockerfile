@@ -11,6 +11,8 @@ RUN apt-get update \
   && cd rtpengine/daemon \
   && make && make install \
   && cp /usr/local/src/rtpengine/daemon/rtpengine /usr/local/bin/rtpengine \
+  && curl -qL -o /usr/bin/netdiscover https://github.com/CyCoreSystems/netdiscover/releases/download/v1.2.5/netdiscover.linux.amd64 \
+  && chmod +x /usr/bin/netdiscover \  
   && rm -Rf /usr/local/src/rtpengine \
   && apt-get purge -y --quiet --force-yes --auto-remove \
   ca-certificates gcc g++ make build-essential git markdown \
