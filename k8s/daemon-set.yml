@@ -1,0 +1,32 @@
+## Opening 10000 UDP ports for RTPEngine
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: rtpengine
+  labels:
+    component: rtpengine
+spec:
+  selector:
+    matchLabels:
+      component: rtpengine
+  template:
+    metadata:
+      name: rtpengine
+      labels:
+        component: rtpengine
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: rtpengine
+      hostNetwork: true
+      containers:
+        - name: rtpengine
+          image: psanders/rtpengine:latest
+          env:
+            #- name: PUBLIC_IP
+            #  value: "192.168.1.xxx"
+            - name: PORT_MIN
+              value: "10000"
+            - name: PORT_MAX
+              value: "20000"              
+            - name: CLOUD
+              value: azure
