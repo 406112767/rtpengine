@@ -15,15 +15,20 @@ spec:
       labels:
         component: rtpengine
     spec:
+      # Here we make sure the pod starts on a single node
       nodeSelector:
-        cloud.google.com/gke-nodepool: rtpengine
+        cloud.google.com/gke-nodepool: rtpengine    
       hostNetwork: true
       containers:
         - name: rtpengine
-          image: psanders/rtpengine:latest
+          image: psanders/rtpengine:test
           env:
             #- name: PUBLIC_IP
-            #  value: "192.168.1.xxx"
+            #  value: "40.68.127.4"
+            - name: BIND_HTTP_PORT
+              value: "5000"
+            - name: LOG_LEVEL
+              value: "7" 
             - name: PORT_MIN
               value: "10000"
             - name: PORT_MAX
