@@ -17,7 +17,8 @@ spec:
     spec:
       # Here we make sure the pod starts on a single node
       nodeSelector:
-        cloud.google.com/gke-nodepool: rtpengine    
+        # cloud.google.com/gke-nodepool: rtpengine
+        rtpengine: "true"
       hostNetwork: true
       containers:
         - name: rtpengine
@@ -30,8 +31,8 @@ spec:
             - name: LOG_LEVEL
               value: "7" 
             - name: PORT_MIN
-              value: "10000"
+              value: "30000"
             - name: PORT_MAX
-              value: "20000"              
+              value: "31000"              
             - name: CLOUD
               value: azure
