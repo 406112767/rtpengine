@@ -34,7 +34,7 @@ esac
 [ -z "$LOG_LEVEL" ] && { export LOG_LEVEL=0; }
 
 if [ -n "$PUBLIC_IP" ]; then
-  MY_IP="$LOCAL_IP"!"$PUBLIC_IP"
+  MY_IP="127.0.0.1"!"$PUBLIC_IP"
 else
   MY_IP=$LOCAL_IP
 fi

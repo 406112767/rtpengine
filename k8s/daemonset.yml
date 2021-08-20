@@ -24,15 +24,15 @@ spec:
         - name: rtpengine
           image: psanders/rtpengine:test
           env:
-            #- name: PUBLIC_IP
-            #  value: "40.68.127.4"
+            - name: PUBLIC_IP
+              value: "40.68.127.4"
             - name: BIND_HTTP_PORT
               value: "5000"
             - name: LOG_LEVEL
-              value: "7" 
+              value: "8" 
             - name: PORT_MIN
               value: "30000"
             - name: PORT_MAX
               value: "31000"              
-            - name: CLOUD
-              value: azure
+            #- name: CLOUD
+            #  value: azure
