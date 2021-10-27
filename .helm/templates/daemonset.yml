@@ -47,11 +47,13 @@ spec:
               value: {{ .Values.rtpengine.publicIP | quote }}
             - name: BIND_HTTP_PORT
               value: {{ .Values.rtpengine.bindHttpPort | quote }}
+            - name: BIND_NG_PORT
+              value: {{ .Values.rtpengine.bindNgPort | quote }}  
             - name: LOG_LEVEL
               value: {{ .Values.rtpengine.logLevel | quote }}
             - name: PORT_MIN
-              value: {{ .Values.rtpengine.ports.min | quote }}
+              value: {{ .Values.rtpengine.rtp.min | quote }}
             - name: PORT_MAX
-              value: {{ .Values.rtpengine.ports.max | quote }}
+              value: {{ .Values.rtpengine.rtp.max | quote }}
             - name: CLOUD
               value: {{ .Values.rtpengine.cloud | quote }}

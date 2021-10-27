@@ -1,5 +1,5 @@
 ## Deployment example
-## The host must open ports 30000 to 31000
+## The host must open ports in the range of PORT_MIN to PORT_MAX
 
 apiVersion: apps/v1
 kind: DaemonSet
@@ -34,8 +34,10 @@ spec:
             - name: LOG_LEVEL
               value: "8" 
             - name: PORT_MIN
-              value: "30000"
+              value: "10000"
             - name: PORT_MAX
-              value: "31000"              
-            #- name: CLOUD
-            #  value: azure
+              value: "10500"              
+            - name: CLOUD
+              value: unknown
+            - name: BIND_NG_PORT
+              value: 22222

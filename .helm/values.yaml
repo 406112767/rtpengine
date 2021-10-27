@@ -13,8 +13,9 @@ rtpengine:
   # Acceptable values are: gcp,aws,digitalocean, and azure
   # cloud:  
   bindHttpPort: 8080
+  bindNgPort: 22222
   logLevel: 7
-  ports:
+  rtp:
     min: 10000
     max: 10500
 
