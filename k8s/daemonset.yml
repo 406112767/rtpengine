@@ -1,4 +1,6 @@
-## Opening 10000 UDP ports for RTPEngine
+## Deployment example
+## The host must open ports 30000 to 31000
+
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -24,6 +26,7 @@ spec:
         - name: rtpengine
           image: psanders/rtpengine:test
           env:
+            # If PUBLIC_IP is undefined the container will guess the public IP
             - name: PUBLIC_IP
               value: "40.68.127.4"
             - name: BIND_HTTP_PORT
