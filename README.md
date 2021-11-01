@@ -4,7 +4,7 @@
 
 ![publish to docker](https://github.com/fonoster/rtpengine/workflows/publish%20to%20docker%20hub/badge.svg)
 
-This repository contains a dockerized distribution of RTPEngine 3.x for use in [Project Fonos](https://github.com/fonoster/fonos). For more documentation on how Fonos images are constructed and how to work with them, please see the [documentation](https://github.com/fonoster/fonos).
+This repository contains a dockerized distribution of RTPEngine 3.x for use in [Fonoster](https://github.com/fonoster/fonoster). For more documentation on how Fonoster images are constructed and how to work with them, please see the [documentation](https://github.com/fonoster/fonoster).
 
 ## Available Versions
 
@@ -60,7 +60,7 @@ Environment variables are used in the entry point script to render configuration
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/fonoster/fonos/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/fonoster/fonoster/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
@@ -70,4 +70,4 @@ See also the list of contributors who [participated](https://github.com/fonoster
 
 ## License
 
-Copyright (C) 2021 by Fonoster Inc. MIT License (see [LICENSE](https://github.com/fonoster/fonos/blob/main/LICENSE) for details).
+Copyright (C) 2021 by Fonoster Inc. MIT License (see [LICENSE](https://github.com/fonoster/fonoster/blob/main/LICENSE) for details).
