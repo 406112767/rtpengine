@@ -24,7 +24,7 @@ spec:
       hostNetwork: true
       containers:
         - name: rtpengine
-          image: psanders/rtpengine:test
+          image: fonoster/rtpengine:0.3.14
           env:
             # If PUBLIC_IP is undefined the container will guess the public IP
             - name: PUBLIC_IP
