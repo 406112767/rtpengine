@@ -56,7 +56,7 @@ Environment variables are used in the entry point script to render configuration
 - `8080` - Default HTTP port
 - `22222` - Default NG port
 
-> This container requires of "host" mode to do its job. The ports PORT_MIN to PORT_MAX must be open.
+> This container requires of "host" mode to do its job. The ports PORT_MIN to PORT_MAX must be open on the host.
 
 ## Contributing
 
@@ -70,4 +70,4 @@ See also the list of contributors who [participated](https://github.com/fonoster
 
 ## License
 
-Copyright (C) 2021 by Fonoster Inc. MIT License (see [LICENSE](https://github.com/fonoster/fonoster/blob/main/LICENSE) for details).
+Copyright (C) 2023 by Fonoster Inc. MIT License (see [LICENSE](https://github.com/fonoster/fonoster/blob/main/LICENSE) for details).
