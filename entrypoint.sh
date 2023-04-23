@@ -34,7 +34,12 @@ esac
 [ -z "$LOG_LEVEL" ] && { export LOG_LEVEL=0; }
 
 if [ -n "$PUBLIC_IP" ]; then
-  MY_IP="127.0.0.1"!"$PUBLIC_IP"
+  # MY_IP="127.0.0.1"!"$PUBLIC_IP"
+  # 绑定端口时，使用的是!之前的地址，SDP协议中使用的是感叹号之后的地址
+  # 如果没有!之后的地址，则使用的是同一个地址
+  # MY_IP="$PUBLIC_IP"!"$LOCAL_IP"
+  MY_IP=$PUBLIC_IP
+  # MY_IP="$LOCAL_IP"!"$PUBLIC_IP"
 else
   MY_IP=$LOCAL_IP
 fi
@@ -50,7 +55,7 @@ sed -i -e "s/LOG_LEVEL/$LOG_LEVEL/g" /etc/rtpengine.conf
 
 if [ "$1" = 'rtpengine' ]; then
   shift
-  exec rtpengine --config-file /etc/rtpengine.conf  "$@"
+  exec rtpengine --config-file /etc/rtpengine.conf "$@"
 fi
 
 exec "$@"

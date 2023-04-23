@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kamailio
+  labels:
+    app: kamailio
+spec:
+  selector:
+    matchLabels:
+      app: kamailio 
+  template:
+    metadata:
+      labels:
+        app: kamailio
+    spec:
+      hostNetwork: true
+      containers:
+      - name: rtpengine
+        image: myrtpengine:v1.9-2023-04-21
+        imagePullPolicy: Never
+        env:
+        - name: PUBLIC_IP
+          valueFrom: 
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: BIND_HTTP_PORT
+          value: "9080"
+        - name: LOG_LEVEL
+          value: "8"
+        - name: PORT_MIN
+          value: "10000"
+        - name: PORT_MAX
+          value: "30000"
+        - name: CLOUD
+          value: unknown
+        - name: BIND_NG_PORT
+          value: "2222"
+        lifecycle:
+          postStart:
+            exec:
+              command: 
+              - /bin/bash
+              - -c
+              - while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:9080/ping)" != '200' ]]; do sleep 5; done;  
+        #resources:
+        #  limits:
+        #    cpu: "4"
+        #    memory: 8Gi
+        #  requests:
+        #    cpu: 1
+        #    memory: 1Gi
+      - name: kamailio
+        image: kamailio/kamailio:5.6.3-buster
+        args:
+        - cp /kamailio.cfg /etc/kamailio/kamailio.cfg; sed -i -e "s#<external_ip_addr>#$POD_IP#g" /etc/kamailio/kamailio.cfg; sed -i -e "s#<internal_ip_addr>#$HOST_IP#g" /etc/kamailio/kamailio.cfg; kamailio -DD -E -m ${SHM_MEMORY} -M ${PKG_MEMORY}
+        command:
+        - /bin/bash
+        - -c
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: HOST_IP
+          valueFrom: 
+            fieldRef:
+              fieldPath: status.hostIP
+        volumeMounts:
+        - name: kamailioconfg
+          mountPath: /kamailio.cfg
+        - name: dispatcherlist
+          mountPath: /etc/kamailio/dispatcher.list
+        #resources:
+        #  limits:
+        #    cpu: "4"
+        #    memory: 8Gi
+        #  requests:
+        #    cpu: 1
+        #    memory: 1Gi
+      volumes:
+      - name: kamailioconfg
+        hostPath:
+          path: /root/kamailio.cfg
+      - name: dispatcherlist
+        hostPath:
+          path: /root/dispatcher.list
+

@@ -1,0 +1,16 @@
+#
+# dispatcher destination sets (groups)
+#
+
+# line format
+# setid(int) destination(sip uri) flags(int,opt) priority(int,opt) attributes(str,opt)
+
+# proxies
+2 sip:10.244.0.3:5060;transport=udp 0 10
+# 2 sip:10.244.0.5:5060;transport=udp 0 10 class=4;prefix=448;strip=2
+# 2 sip:127.0.0.1:5082;px=vx 0 5 duid=abc;socket=udp:x.x.x.x:5060;pipe=p10
+
+# gateways
+1 sip:127.0.0.1:7070 0 0 duid=xyz;maxload=20
+1 sip:127.0.0.1:7072 0 5
+1 sip:127.0.0.1:7074
