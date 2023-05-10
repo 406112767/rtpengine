@@ -3,7 +3,14 @@
 #
 
 # line format
+# flags (listed by index - can be bitwise mask of values): 0 (value 1) - inactive destination; 1 (value 2) - temporary trying destination (in the way to become inactive if it does not reply to keepalives - there is a module parameter to set the threshold of failures); 2 (value 4) - admin disabled destination; 3 (value 8) - probing destination (sending keep alives);
 # setid(int) destination(sip uri) flags(int,opt) priority(int,opt) attributes(str,opt)
+
+# There are some predefined names:
+#'duid' - used for call load dispatching. It must be an unique value to identify a destination (gateway address). Practically the load within the group is associated with this value.
+#'maxload' - used for call load dispatching. It must be a positive integer, defining the upper limit of active calls per destination. When the limit is reached, then the gateway is no longer selected for new calls until an exiting call via that gateway is terminated. If set to 0, then no active call limit is used.
+#'weight' - used for weight based load distribution. It must be set to a positive integer value beteen 0 and 100. The value represents the percent of calls to be sent to that gateways.
+#'socket' - used to set the sending socket for the gateway. It is used for sending the SIP traffic as well as OPTIONS keepalives.
 
 # proxies
 2 sip:10.244.0.3:5060;transport=udp 0 10
